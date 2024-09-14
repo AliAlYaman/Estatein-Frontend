@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { register } from '../services/api/api'; // Ensure this imports the correct register API function
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { register } from "../services/api/api"; // Ensure this imports the correct register API function
 
 // Custom hook for form state management
 const useForm = (initialState) => {
@@ -16,12 +16,12 @@ const useForm = (initialState) => {
 
 const RegisterForm = () => {
   const [formValues, handleChange] = useForm({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   // Validation Functions
@@ -35,31 +35,34 @@ const RegisterForm = () => {
 
     // Validation logic
     if (!nameIsValid(name)) {
-      setError('Please enter your full name (at least 3 characters)');
+      setError("Please enter your full name (at least 3 characters)");
       return;
     }
     if (!emailIsValid(email)) {
-      setError('Please enter a valid email address');
+      setError("Please enter a valid email address");
       return;
     }
     if (password.length < 8) {
-      setError('Password must be at least 8 characters long');
+      setError("Password must be at least 8 characters long");
       return;
     }
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
 
     try {
       // Attempt to register the user
       await register(name, email, password);
-      setError(''); // Clear any existing errors
-      console.log('Registered successfully:', { name, email });
-      // navigate('/');  // Redirect to dashboard after successful registration
+      setError(""); // Clear any existing errors
+      console.log("Registered successfully:", { name, email });
+      navigate('/');  // Redirect to dashboard after successful registration
     } catch (error) {
       // Handle errors (e.g., from the API)
-      setError(error.response?.data?.message || 'Registration failed. Please try again.');
+      setError(
+        error.response?.data?.message ||
+          "Registration failed. Please try again."
+      );
     }
   };
 
@@ -68,15 +71,24 @@ const RegisterForm = () => {
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
         {/* Brand Logo */}
         <div className="text-center mb-8">
-          <img src="src/assets/logo/logo.png" alt="Brand Logo" className="mx-auto h-12 w-12" />
-          <h2 className="mt-4 text-3xl font-extrabold text-gray-800">Create an Account</h2>
+          <img
+            src="src/assets/logo/logo.png"
+            alt="Brand Logo"
+            className="mx-auto h-12 w-12"
+          />
+          <h2 className="mt-4 text-3xl font-extrabold text-gray-800">
+            Create an Account
+          </h2>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit}>
           {/* Name Field */}
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700" htmlFor="name">
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="name"
+            >
               Full Name
             </label>
             <input
@@ -85,7 +97,6 @@ const RegisterForm = () => {
               name="name"
               value={formValues.name}
               onChange={handleChange}
-              required
               className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#703BF7] focus:border-transparent transition-all"
               aria-label="Full Name"
             />
@@ -93,16 +104,18 @@ const RegisterForm = () => {
 
           {/* Email Field */}
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700" htmlFor="email">
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="email"
+            >
               Email Address
             </label>
             <input
-              type="email"
+              type="text"
               id="email"
               name="email"
               value={formValues.email}
               onChange={handleChange}
-              required
               className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#703BF7] focus:border-transparent transition-all"
               aria-label="Email address"
             />
@@ -110,7 +123,10 @@ const RegisterForm = () => {
 
           {/* Password Field */}
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700" htmlFor="password">
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -119,7 +135,6 @@ const RegisterForm = () => {
               name="password"
               value={formValues.password}
               onChange={handleChange}
-              required
               className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#703BF7] focus:border-transparent transition-all"
               aria-label="Password"
             />
@@ -127,7 +142,10 @@ const RegisterForm = () => {
 
           {/* Confirm Password Field */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700" htmlFor="confirmPassword">
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="confirmPassword"
+            >
               Confirm Password
             </label>
             <input
@@ -136,7 +154,6 @@ const RegisterForm = () => {
               name="confirmPassword"
               value={formValues.confirmPassword}
               onChange={handleChange}
-              required
               className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#703BF7] focus:border-transparent transition-all"
               aria-label="Confirm password"
             />
@@ -144,7 +161,10 @@ const RegisterForm = () => {
 
           {/* Error Message with aria-live for accessibility */}
           {error && (
-            <div className="mb-4 text-red-600 text-sm font-semibold" aria-live="polite">
+            <div
+              className="mb-4 text-red-600 text-sm font-semibold"
+              aria-live="polite"
+            >
               {error}
             </div>
           )}
@@ -162,7 +182,8 @@ const RegisterForm = () => {
           {/* Footer Links */}
           <div className="mt-6 flex justify-between text-sm text-gray-600">
             <Link to="/login" className="hover:underline">
-              Already have an account? <span className='text-primary font-bold'>Sign in</span>
+              Already have an account?{" "}
+              <span className="text-primary font-bold">Sign in</span>
             </Link>
           </div>
         </form>

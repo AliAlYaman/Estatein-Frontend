@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../services/api/api';
 
 // Custom hook for form state management
 const useForm = (initialState) => {
@@ -21,7 +22,7 @@ const LoginForm = () => {
   // Regex for basic email validation
   const emailIsValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     const { email, password } = formValues;
@@ -36,13 +37,16 @@ const LoginForm = () => {
       return;
     }
 
-    // Simulated login logic
-    if (email === 'test@example.com' && password === 'password') {
-      setError('');
-      navigate('/dashboard');  // Redirect on successful login
-    } else {
-      setError('Invalid email or password');
+    
+
+    try{
+      await login(email , password);
+      navigate('/')
+    } catch(e){
+      console.log(e);
+      return
     }
+    
   };
 
   return (
