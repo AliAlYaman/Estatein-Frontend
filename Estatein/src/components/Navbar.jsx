@@ -1,11 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { api } from "../services/api/api";
 
 export const Navbar = () => {
   // State to handle mobile menu open/close
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   // State to track the active link
   const [activeLink, setActiveLink] = useState("home");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    // Check authentication status on component mount
+    useEffect(() => {
+        api.get('/api/user') // assuming this route checks if the user is authenticated
+            .then(response => {
+                if (response.data) {
+                    setIsAuthenticated(true);
+                }
+            })
+            .catch(() => {
+                setIsAuthenticated(false);
+            });
+    }, []);
+
+    const handleLogout = async () => {
+        try {
+            await api.post('/api/logout');
+            setIsAuthenticated(false);  // update state to false when logged out
+        } catch (error) {
+            console.error('Logout failed', error);
+        }
+    };
+
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -71,9 +96,11 @@ export const Navbar = () => {
 
         {/* Login Button - Hidden on mobile, visible on larger screens */}
         <div className="hidden md:flex justify-between items-center gap-1">
-          <Link to="/login" className="bg-tertiary border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold">
+          {isAuthenticated ? <button onClick={handleLogout} className="bg-tertiary border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold">
+          Log out
+          </button>:<Link to="/login" className="bg-tertiary border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold">
             Log in
-          </Link>
+          </Link> }
         </div>
 
         {/* Hamburger Icon - Visible on mobile screens only */}

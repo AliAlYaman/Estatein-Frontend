@@ -7,28 +7,19 @@ export const api = axios.create({
   baseURL: "http://localhost:8000", // Replace with your API's base URL
 });
 
-export const checkAuth = async () => {
-  await api.get(`/sanctum/csrf-cookie`, {
-    withCredentials: true, // Important to include credentials for cookies
-  });
-  try {
-    const response = await api.get(
-      "/api/user",
-      {},
-      {
-        headers: {
-          Accept: "application/json",
-        },
-        withCredentials: true,
-        withXSRFToken: true,
-      }
-    );
+export const checkUser = async() => {
+    const response = await api.get('/api/user', {
+      headers: {
+        Accept : 'application/json'
+      },
+      withCredentials : true,
+      withXSRFToken:true
+    });
 
-    console.log("Success : " + response.data);
-  } catch (e) {
-    console.log(`Failed auth ${e}`);
-  }
-};
+    return response.data
+    
+}
+
 
 export const register = async (name, email, password) => {
   await api.get(`/sanctum/csrf-cookie`, {
@@ -73,3 +64,18 @@ export const login = async (email, password) => {
     console.log(3);
   }
 };
+
+
+export const logout = async () =>{
+  try{
+    const response = await api.post('/api/logout', {} , {
+      headers : {
+        Accept : 'application/json'
+      },
+      withCredentials:true,
+      withXSRFToken:true
+    })
+  }catch(e){
+    return e
+  }
+}
