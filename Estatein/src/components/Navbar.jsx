@@ -10,16 +10,20 @@ export const Navbar = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
   const handleLinkClick = (link) => {
     setActiveLink(link);
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false); // Close mobile menu after click
+    }
   };
 
   return (
     <>
-      <div className="flex font-Urbanist text-white justify-between items-center bg-secondary h-[60px] sm:px-[65px] xl:px-[120px] px-[16px] sm:h-[80px] xl:h-[100px] sm:text-[14px] text-lg">
+      <div className="flex font-Urbanist max-[520px]:w-[520px] text-white justify-between items-center bg-secondary h-[60px] sm:px-[65px] xl:px-[120px] px-[16px] sm:h-[80px] xl:h-[100px] sm:text-[14px] text-lg  ">
         {/* Logo Section */}
         <div className="flex justify-center items-center gap-2">
-          <img src="src/assets/logo/logo.png" height={50} width={50} />
+          <img src="src/assets/logo/logo.png" height={50} width={50} alt="logo" />
           <p className="text-3xl">Estatein</p>
         </div>
 
@@ -29,7 +33,7 @@ export const Navbar = () => {
             <Link
               to="/"
               className={`px-4 py-2 rounded-md ${
-                activeLink === "home" ? "bg-tertiary  border-gray-800 border-[0.75px]" : ""
+                activeLink === "home" ? "bg-tertiary border-gray-800 border-[0.75px]" : ""
               }`}
               onClick={() => handleLinkClick("home")}
             >
@@ -37,7 +41,7 @@ export const Navbar = () => {
             </Link>
             <Link
               to="/about"
-              className={`px-4 py-2 rounded-md  ${
+              className={`px-4 py-2 rounded-md ${
                 activeLink === "about" ? "bg-tertiary border-gray-800 border-[0.75px]" : ""
               }`}
               onClick={() => handleLinkClick("about")}
@@ -46,8 +50,8 @@ export const Navbar = () => {
             </Link>
             <Link
               to="/properties"
-              className={`px-4 py-2 rounded-md${
-                activeLink === "properties" ? "bg-tertiary  border-gray-800 border-[0.75px] " : ""
+              className={`px-4 py-2 rounded-md ${
+                activeLink === "properties" ? "bg-tertiary border-gray-800 border-[0.75px]" : ""
               }`}
               onClick={() => handleLinkClick("properties")}
             >
@@ -56,7 +60,7 @@ export const Navbar = () => {
             <Link
               to="/services"
               className={`px-4 py-2 rounded-md ${
-                activeLink === "services" ? "bg-tertiary  border-gray-800 border-[0.75px]" : ""
+                activeLink === "services" ? "bg-tertiary border-gray-800 border-[0.75px]" : ""
               }`}
               onClick={() => handleLinkClick("services")}
             >
@@ -67,7 +71,9 @@ export const Navbar = () => {
 
         {/* Login Button - Hidden on mobile, visible on larger screens */}
         <div className="hidden md:flex justify-between items-center ">
-          <Link to='/login' className="bg-tertiary  border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold">Log in</Link>
+          <Link to="/login" className="bg-tertiary border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold">
+            Log in
+          </Link>
         </div>
 
         {/* Hamburger Icon - Visible on mobile screens only */}
@@ -93,38 +99,39 @@ export const Navbar = () => {
 
       {/* Mobile Menu - Visible when the hamburger is clicked */}
       {isMobileMenuOpen && (
-        <div className="md:hidden flex flex-col  bg-secondary text-white py-4 space-y-4 px-2">
+        <div className="md:hidden flex flex-col bg-secondary text-white py-4 space-y-4 px-4">
           <Link
             to="/"
-            className="p-3  rounded-md bg-tertiary"
-            onClick={toggleMobileMenu}
+            className={`p-3 rounded-md ${activeLink === "home" ? "bg-tertiary" : ""}`}
+            onClick={() => handleLinkClick("home")}
           >
             Home
           </Link>
           <Link
             to="/about"
-            className="p-3 rounded-md bg-tertiary"
-            onClick={toggleMobileMenu}
+            className={`p-3 rounded-md ${activeLink === "about" ? "bg-tertiary" : ""}`}
+            onClick={() => handleLinkClick("about")}
           >
             About Us
           </Link>
           <Link
             to="/properties"
-            className="p-3 rounded-md bg-tertiary"
-            onClick={toggleMobileMenu}
+            className={`p-3 rounded-md ${activeLink === "properties" ? "bg-tertiary" : ""}`}
+            onClick={() => handleLinkClick("properties")}
           >
             Properties
           </Link>
           <Link
             to="/services"
-            className="p-3 rounded-md bg-tertiary"
-            onClick={toggleMobileMenu}
+            className={`p-3 rounded-md ${activeLink === "services" ? "bg-tertiary" : ""}`}
+            onClick={() => handleLinkClick("services")}
           >
             Services
           </Link>
           <Link
-            className="p-3 rounded-md bg-tertiary"
-            onClick={toggleMobileMenu}
+            to="/login"
+            className={`p-3 rounded-md ${activeLink === "login" ? "bg-tertiary" : ""}`}
+            onClick={() => handleLinkClick("login")}
           >
             Login
           </Link>
