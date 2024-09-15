@@ -70,7 +70,7 @@ export const Navbar = () => {
         </div>
 
         {/* Login Button - Hidden on mobile, visible on larger screens */}
-        <div className="hidden md:flex justify-between items-center ">
+        <div className="hidden md:flex justify-between items-center gap-1">
           <Link to="/login" className="bg-tertiary border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold">
             Log in
           </Link>
@@ -140,3 +140,4 @@ export const Navbar = () => {
     </>
   );
 };
+
