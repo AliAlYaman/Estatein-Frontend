@@ -70,6 +70,7 @@ export const login = async (email, password) => {
     );
     console.log(response.data)
   } catch (e) {
-    console.log(3);
+    console.log(e);
   }
 };
+

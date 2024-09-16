@@ -1,76 +1,66 @@
-import React, { useState, useEffect } from "react";
-import { Loader2, CheckCircle, Mail } from "lucide-react";
+import React, { useEffect, useState } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function EmailVerification() {
   const [isVerifying, setIsVerifying] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
-
-  const handleVerification = () => {
-    setIsVerifying(true);
-    // Simulate verification process
-    setTimeout(() => {
-      setIsVerified(true);
-    }, 2000);
-  };
+  const [error, setError] = useState(null);
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (isVerified) {
-      // Simulate redirect to home page
-      setTimeout(() => {
-        alert("Redirecting to home page...");
-        // In a real application, you would use routing here
-        // router.push('/home')
-      }, 1500);
+    const verificationUrl = searchParams.get('verification_url');
+
+    if (!verificationUrl) {
+      setError('Invalid verification link.');
+      return;
     }
-  }, [isVerified]);
+
+    const verifyEmail = async () => {
+      setIsVerifying(true);
+      try {
+        const response = await axios.get(verificationUrl);
+
+        if (response.data.success) {
+          setIsVerified(true);
+          setTimeout(() => {
+            navigate('/'); // Redirect to home or another page after verification
+          }, 2000);
+        } else {
+          setError('Verification failed.');
+        }
+      } catch (err) {
+        setError('Verification failed. Please try again.');
+      } finally {
+        setIsVerifying(false);
+      }
+    };
+
+    verifyEmail();
+  }, [searchParams, navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-secondary">
-      <div className="w-full max-w-md mx-4 overflow-hidden shadow-2xl bg-white rounded-lg">
-        <div className="p-8">
-          <div className="flex justify-center mb-6">
-            <div className="rounded-full bg-[#703BF7] p-3">
-              <Mail className="w-8 h-8 text-white" />
-            </div>
+      <div className="bg-white p-8 shadow-lg rounded-lg max-w-md w-full">
+        <h2 className="text-2xl font-bold text-center mb-4">Email Verification</h2>
+
+        {isVerified ? (
+          <div className="text-center">
+            <p className="text-green-600 font-semibold">Email Verified Successfully!</p>
+            <p className="text-gray-500">You will be redirected shortly.</p>
           </div>
-          <h2 className="text-2xl font-bold text-center text-[#1A1A1A] mb-2">
-            Email Verification
-          </h2>
-          <p className="text-center text-[#1A1A1A] opacity-70 mb-6">
-            Please verify your email address to activate your account
-          </p>
-          {!isVerified ? (
-            <button
-              className="w-full bg-[#703BF7] hover:bg-[#5c2fd6] text-white py-2 px-4 rounded-md transition-colors duration-300"
-              onClick={handleVerification}
-              disabled={isVerifying}
-            >
-              {isVerifying ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin inline" />
-                  Verifying...
-                </>
-              ) : (
-                "Verify Email"
-              )}
-            </button>
-          ) : (
-            <div className="text-center">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <p className="text-lg font-semibold text-[#703BF7] mb-2">
-                Email Verified Successfully!
-              </p>
-              <p className="text-sm text-[#1A1A1A] opacity-70">
-                You will be redirected to the home page shortly.
-              </p>
-            </div>
-          )}
-        </div>
-        <div className="px-8 py-4 bg-gray-50 border-t border-gray-100">
-          <p className="text-xs text-center text-[#1A1A1A] opacity-50">
-            If you didn't request this verification, please ignore this message.
-          </p>
-        </div>
+        ) : (
+          <>
+            <p className="text-gray-500 text-center mb-6">
+              Verifying your email address...
+            </p>
+
+            {error && <p className="text-red-500 text-center">{error}</p>}
+
+            {isVerifying && <p className="text-center text-blue-500">Verifying...</p>}
+          </>
+        )}
       </div>
     </div>
   );
