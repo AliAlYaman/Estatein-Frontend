@@ -7,18 +7,6 @@ export const api = axios.create({
   baseURL: "http://localhost:8000", // Replace with your API's base URL
 });
 
-export const checkUser = async() => {
-    const response = await api.get('/api/user', {
-      headers: {
-        Accept : 'application/json'
-      },
-      withCredentials : true,
-      withXSRFToken:true
-    });
-
-    return response.data
-    
-}
 
 
 export const register = async (name, email, password) => {

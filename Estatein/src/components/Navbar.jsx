@@ -155,13 +155,12 @@ export const Navbar = () => {
           >
             Services
           </Link>
-          <Link
-            to="/login"
-            className={`p-3 rounded-md ${activeLink === "login" ? "bg-tertiary" : ""}`}
-            onClick={() => handleLinkClick("login")}
-          >
-            Login
-          </Link>
+          {isAuthenticated ? <button onClick={handleLogout}   className={`text-start p-3 rounded-md ${activeLink === "services" ? "bg-tertiary" : ""}`}>
+          Log out
+          </button>:<Link to="/login"  className={`p-3 rounded-md ${activeLink === "services" ? "bg-tertiary" : ""}`}
+            onClick={() => handleLinkClick("services")}>
+            Log in
+          </Link> }
         </div>
       )}
     </>
