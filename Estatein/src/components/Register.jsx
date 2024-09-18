@@ -56,7 +56,7 @@ const RegisterForm = () => {
       await register(name, email, password);
       setError(""); // Clear any existing errors
       console.log("Registered successfully:", { name, email });
-      navigate('/');  // Redirect to dashboard after successful registration
+      navigate('/login');  // Redirect to dashboard after successful registration
     } catch (error) {
       // Handle errors (e.g., from the API)
       setError(

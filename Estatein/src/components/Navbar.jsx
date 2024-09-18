@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { logout } from "../services/api/api";
 
 export const Navbar = () => {
+  const [isAuth, setIsAuth] = useState(false)
   // State to handle mobile menu open/close
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   // State to track the active link
@@ -13,6 +15,26 @@ export const Navbar = () => {
   const handleLinkClick = (link) => {
     setActiveLink(link);
   };
+
+  const checkAuth = ()=>{
+    const token = localStorage.getItem('token'); 
+        if (!token) {
+            console.error('No token found. Please log in.');
+            setIsAuth(false)
+          }
+        else{
+          setIsAuth(true)
+        }
+  }
+
+  const handleLogout = async()=>{
+    await logout();
+    setIsAuth(false)
+  }
+
+  useEffect(()=> {
+    checkAuth()
+  } , [])
 
   return (
     <>
@@ -67,7 +89,7 @@ export const Navbar = () => {
 
         {/* Login Button - Hidden on mobile, visible on larger screens */}
         <div className="hidden md:flex justify-between items-center ">
-          <Link to='/login' className="bg-tertiary  border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold">Log in</Link>
+          {isAuth ? <button onClick={handleLogout} className="bg-tertiary  border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold" >Log out</button> : <Link to='/login' className="bg-tertiary  border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold">Log in</Link>}
         </div>
 
         {/* Hamburger Icon - Visible on mobile screens only */}
