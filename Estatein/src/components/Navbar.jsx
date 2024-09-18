@@ -1,36 +1,14 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { api } from "../services/api/api";
+import { logout } from "../services/api/api";
 
 export const Navbar = () => {
+  const [isAuth, setIsAuth] = useState(false)
   // State to handle mobile menu open/close
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   // State to track the active link
   const [activeLink, setActiveLink] = useState("home");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    // Check authentication status on component mount
-    useEffect(() => {
-        api.get('/api/user') // assuming this route checks if the user is authenticated
-            .then(response => {
-                if (response.data) {
-                    setIsAuthenticated(true);
-                }
-            })
-            .catch(() => {
-                setIsAuthenticated(false);
-            });
-    }, []);
-
-    const handleLogout = async () => {
-        try {
-            await api.post('/api/logout');
-            setIsAuthenticated(false);  // update state to false when logged out
-        } catch (error) {
-            console.error('Logout failed', error);
-        }
-    };
-
+  
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -38,10 +16,27 @@ export const Navbar = () => {
 
   const handleLinkClick = (link) => {
     setActiveLink(link);
-    if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false); // Close mobile menu after click
-    }
   };
+
+  const checkAuth = ()=>{
+    const token = localStorage.getItem('token'); 
+        if (!token) {
+            console.error('No token found. Please log in.');
+            setIsAuth(false)
+          }
+        else{
+          setIsAuth(true)
+        }
+  }
+
+  const handleLogout = async()=>{
+    await logout();
+    setIsAuth(false)
+  }
+
+  useEffect(()=> {
+    checkAuth()
+  } , [])
 
   return (
     <>
@@ -95,12 +90,8 @@ export const Navbar = () => {
         </div>
 
         {/* Login Button - Hidden on mobile, visible on larger screens */}
-        <div className="hidden md:flex justify-between items-center gap-1">
-          {isAuthenticated ? <button onClick={handleLogout} className="bg-tertiary border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold">
-          Log out
-          </button>:<Link to="/login" className="bg-tertiary border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold">
-            Log in
-          </Link> }
+        <div className="hidden md:flex justify-between items-center ">
+          {isAuth ? <button onClick={handleLogout} className="bg-tertiary  border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold" >Log out</button> : <Link to='/login' className="bg-tertiary  border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold">Log in</Link>}
         </div>
 
         {/* Hamburger Icon - Visible on mobile screens only */}
