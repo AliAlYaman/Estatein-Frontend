@@ -3,6 +3,7 @@ import { Discover } from "../components/Discover";
 import { HeroSection } from "../components/HeroSection";
 import { Navbar } from "../components/Navbar";
 import { api } from "../services/api/api";
+import Cards from "../components/Cards";
 
 
 
@@ -32,5 +33,7 @@ export const LandingPage = () => {
     <Discover/>
     <Navbar/>
     <HeroSection/>
+    <Cards/>
+
     </>);
 }
