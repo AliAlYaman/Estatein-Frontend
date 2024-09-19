@@ -146,7 +146,7 @@ export const Navbar = () => {
           >
             Services
           </Link>
-          {isAuthenticated ? <button onClick={handleLogout}   className={`text-start p-3 rounded-md ${activeLink === "services" ? "bg-tertiary" : ""}`}>
+          {isAuth ? <button onClick={handleLogout}   className={`text-start p-3 rounded-md ${activeLink === "services" ? "bg-tertiary" : ""}`}>
           Log out
           </button>:<Link to="/login"  className={`p-3 rounded-md ${activeLink === "services" ? "bg-tertiary" : ""}`}
             onClick={() => handleLinkClick("services")}>

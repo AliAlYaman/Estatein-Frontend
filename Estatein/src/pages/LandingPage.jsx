@@ -4,6 +4,7 @@ import { HeroSection } from "../components/HeroSection";
 import { Navbar } from "../components/Navbar";
 import { api } from "../services/api/api";
 import Cards from "../components/Cards";
+import { PaginatedItems } from "../components/Paginate";
 
 
 
@@ -34,6 +35,6 @@ export const LandingPage = () => {
     <Navbar/>
     <HeroSection/>
     <Cards/>
-
+    <PaginatedItems itemsPerPage={3}/>
     </>);
 }

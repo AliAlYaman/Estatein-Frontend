@@ -95,3 +95,18 @@ export const logout = async () => {
   }
 }
 
+export const fetchProperties = async()=>{
+  try{
+    const response = await api.get('/api/properties', {
+      headers: {
+        Accept : 'application/json'
+      },
+    })
+    console.log('Properties fetched')
+    console.log(response.data)
+    return response.data
+  }
+  catch(e){
+    console.log(e)
+  }
+}
