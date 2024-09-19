@@ -42,7 +42,7 @@ export const HeroSection = () => {
         {/* Right Section (Image) */}
         <div className="md:w-1/2 w-full">
           <img
-            src="public/assets/background/HeroBackground.png"
+            src="assets/background/HeroBackground.png"
             className="h-full w-full object-cover"
             alt="Hero background"
           />

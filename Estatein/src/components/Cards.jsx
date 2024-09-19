@@ -6,7 +6,7 @@ const Card = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
       <div className="w-full max-w-md p-6 bg-secondary rounded-lg shadow-md flex flex-col items-center justify-center space-y-4">
         <div className="rounded-full ">
-          <img src='public/assets/icons/home.png' height={60}/>
+          <img src='assets/icons/home.png' height={60}/>
         </div>
         <h2 className="text-center text-base font-medium text-white font-Urbanist">
           Find Your Dream Home
