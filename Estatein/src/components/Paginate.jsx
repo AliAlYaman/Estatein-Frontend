@@ -45,7 +45,7 @@ function Items({ currentItems }) {
                 <div className="flex flex-wrap w-full justify-between items-center gap-2 py-3">
                   <div className="flex items-center gap-2 px-2 py-1 bg-[#262626] rounded-full">
                     <img
-                      src="src/assets/icons/bedroom.png"
+                      src="public/assets/icons/bedroom.png"
                       alt="bedroom"
                       className="h-4"
                     />
@@ -56,7 +56,7 @@ function Items({ currentItems }) {
 
                   <div className="flex items-center gap-2 px-2 py-1 bg-[#262626] rounded-full">
                     <img
-                      src="src/assets/icons/bathroom.png"
+                      src="public/assets/icons/bathroom.png"
                       alt="bathroom"
                       className="h-4"
                     />
@@ -67,7 +67,7 @@ function Items({ currentItems }) {
 
                   <div className="flex items-center gap-2 px-2 py-1 bg-[#262626] rounded-full">
                     <img
-                      src="src/assets/icons/villa.png"
+                      src="public/assets/icons/villa.png"
                       alt="villa"
                       className="h-4"
                     />

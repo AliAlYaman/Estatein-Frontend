@@ -43,7 +43,7 @@ export const Navbar = () => {
       <div className="flex font-Urbanist max-[520px]:w-[520px] text-white justify-between items-center bg-secondary h-[60px] sm:px-[65px] xl:px-[120px] px-[16px] sm:h-[80px] xl:h-[100px] sm:text-[14px] text-lg  ">
         {/* Logo Section */}
         <div className="flex justify-center items-center gap-2">
-          <img src="src/assets/logo/logo.png" height={50} width={50} alt="logo" />
+          <img src="public/assets/logo/logo.png" height={50} width={50} alt="logo" />
           <p className="text-3xl">Estatein</p>
         </div>
 
