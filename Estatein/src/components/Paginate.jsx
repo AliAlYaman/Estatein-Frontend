@@ -126,12 +126,12 @@ export const PaginatedItems = ({ itemsPerPage }) => {
         pageCount={pageCount}
         previousLabel="←" // Using an arrow for "Previous"
         renderOnZeroPageCount={null}
-        containerClassName="flex items-center justify-between w-full px-[52px]" // Adjusting spacing for the arrows
+        containerClassName="flex items-center justify-center w-full px-[52px]" // Adjusting spacing for the arrows
         pageClassName="hidden" // Hiding the page numbers
         previousClassName="block"
-        previousLinkClassName="px-3 py-2 bg-primary text-white rounded-md hover:bg-gray-600 mx-6"
+        previousLinkClassName="px-3 py-2 bg-primary text-white rounded-md hover:bg-gray-600 mx-1"
         nextClassName="block"
-        nextLinkClassName="px-3 py-2 bg-primary text-white rounded-md hover:bg-gray-600 mx-6"
+        nextLinkClassName="px-3 py-2 bg-primary text-white rounded-md hover:bg-gray-600 mx-1"
         activeClassName="hidden" // No active class needed since we're hiding numbers
       />
     </div>

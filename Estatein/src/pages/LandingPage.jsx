@@ -5,12 +5,27 @@ import { Navbar } from "../components/Navbar";
 import { api } from "../services/api/api";
 import Cards from "../components/Cards";
 import { PaginatedItems } from "../components/Paginate";
+import { CustomerReviews } from "../components/CustomerReview";
+import FAQCards from "../components/FAQ";
+import { Explore } from "../components/Explore";
+import Footer from "../components/Footer";
 
 
 
 export const LandingPage = () => {
-    
-     
+    const faqData = [
+      { question: "How do I search for properties on Estatein?", answer: "Learn how to use our user-friendly search tools to find properties that match your criteria." },
+      { question: "What documents do I need to sell my property through Estatein?", answer: "Find out about the necessary documentation for listing your property with us." },
+      { question: "How can I contact an Estatein agent?", answer: "Discover the different ways you can get in touch with our experienced agents." },
+      { question: "How do I search for properties on Estatein?", answer: "Learn how to use our user-friendly search tools to find properties that match your criteria." },
+      { question: "What documents do I need to sell my property through Estatein?", answer: "Find out about the necessary documentation for listing your property with us." },
+      { question: "How can I contact an Estatein agent?", answer: "Discover the different ways you can get in touch with our experienced agents." },
+      { question: "What is Tailwind CSS?", answer: "Tailwind CSS is a utility-first CSS framework for building custom designs." },
+      { question: "What is React?", answer: "React is a JavaScript library for building user interfaces." },
+      { question: "What is Tailwind CSS?", answer: "Tailwind CSS is a utility-first CSS framework for building custom designs." },
+      // Add more FAQs here
+    ];
+      
     const handleClick = async () => {
         const token = localStorage.getItem('token'); 
         if (!token) {
@@ -36,5 +51,9 @@ export const LandingPage = () => {
     <HeroSection/>
     <Cards/>
     <PaginatedItems itemsPerPage={3}/>
+    <CustomerReviews/>
+    <FAQCards faqs={faqData}/>
+    <Explore/>
+    <Footer/>
     </>);
 }
