@@ -4,6 +4,8 @@ import LoginForm from './components/Login';
 import RegisterForm from './components/Register';
 import { LandingPage } from './pages/LandingPage';
 import EmailVerification from './pages/EmailVerification';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
           <Route path="/login" element={<LoginForm/>}/>
           <Route path="/register" element={<RegisterForm/>}/>
           <Route path='/email-verification' element={<EmailVerification/>}></Route>
+          <Route path='/forgot-password' element={<ForgotPassword/>}></Route>
+          <Route path='/reset-password' element={<ResetPassword/>}></Route>
         </Routes>
     </Router>
     </>

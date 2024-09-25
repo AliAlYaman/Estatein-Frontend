@@ -80,6 +80,9 @@ export const login = async (email, password) => {
 
 export const logout = async () => {
   try {
+    await api.get(`/sanctum/csrf-cookie`, {
+      withCredentials: true, // Important to include credentials for cookies
+    });
     const response = await api.post('/api/logout', {}, {
       headers: {
         Accept: 'application/json'
@@ -109,4 +112,22 @@ export const fetchProperties = async()=>{
   catch(e){
     console.log(e)
   }
+}
+
+
+export const forgetPassword = async (email) =>{
+  await api.get(`/sanctum/csrf-cookie`, {
+    withCredentials: true, // Important to include credentials for cookies
+  });
+  const response = await api.post('/api/forgot-password' , {
+    email
+  } , {
+    headers: {
+      Accept: 'application/json'
+    },
+    withCredentials:true,
+    withXSRFToken:true
+  })
+
+  return response.data;
 }

@@ -72,7 +72,7 @@ const RegisterForm = () => {
         {/* Brand Logo */}
         <div className="text-center mb-8">
           <img
-            src="src/assets/logo/logo.png"
+            src="assets/logo/logo.png"
             alt="Brand Logo"
             className="mx-auto h-12 w-12"
           />

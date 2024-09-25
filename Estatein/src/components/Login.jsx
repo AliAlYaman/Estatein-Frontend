@@ -44,7 +44,6 @@ const LoginForm = () => {
       navigate('/')
     } catch(e){
       console.log(e);
-      return
     }
     
   };
@@ -54,7 +53,7 @@ const LoginForm = () => {
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
         {/* Brand Logo */}
         <div className="text-center mb-8">
-          <img src="src\assets\logo\logo.png" alt="Brand Logo" className="mx-auto h-12 w-12" />
+          <img src="assets\logo\logo.png" alt="Brand Logo" className="mx-auto h-12 w-12" />
           <h2 className="mt-4 text-3xl font-extrabold text-gray-800">Welcome Back!</h2>
         </div>
 

@@ -20,6 +20,7 @@ export default function EmailVerification() {
     const verifyEmail = async () => {
       setIsVerifying(true);
       try {
+        console.log(verificationUrl)
         const response = await axios.get(verificationUrl);
 
         if (response.data.success) {
