@@ -6,7 +6,7 @@ import { fetchProperties } from "../services/api/api";
 function Items({ currentItems }) {
   return (
     <>
-      <div className="flex flex-col  items-start justify-center w-full px-4 md:px-10 lg:px-20 my-10 lg:my-20 text-white  gap-6">
+      <div className="flex flex-col  items-start justify-between w-full px-4 md:px-4 lg:px-16 my-10 lg:my-20 text-white  gap-2">
         <p className="font-Urbanist font-semibold text-[24px] md:text-[28px]">
           Featured Properties
         </p>
@@ -22,17 +22,17 @@ function Items({ currentItems }) {
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 gap-4 w-full px-4 md:px-10 lg:px-16">
+      <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full px-4 md:px-4 lg:px-16 2xl:px-28 ">
         {currentItems &&
           currentItems.map((item) => (
             <div
               key={item.id}
-              className="bg-secondary border border-gray-600 font-Urbanist text-white shadow-md rounded-lg overflow-hidden p-3"
+              className="bg-secondary border border-gray-600 font-Urbanist text-white shadow-md rounded-lg overflow-hidden p-3 flex flex-col justify-between"
             >
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-[200px] object-cover rounded-lg"
+                className="w-full h-[350px] object-cover rounded-lg"
               />
               <div className="p-4 text-left">
                 <h3 className="text-lg sm:text-xl font-semibold">
@@ -76,7 +76,7 @@ function Items({ currentItems }) {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center justify-start gap-4 py-2">
+                <div className="flex items-center justify-center gap-4 py-4">
                   <div className="flex flex-col">
                   <p className="text-sm text-[#999999]">Price:</p>
                 <p className="text-white text-lg font-bold">{item.price}</p>

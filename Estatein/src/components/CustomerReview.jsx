@@ -22,7 +22,7 @@ const StarRating = ({ rating }) => {
 
 const CustomerReviewCard = ({ review }) => {
   return (
-    <div className="bg-tertiary rounded-xl shadow-md overflow-hidden font-Urbanist h-full border border-gray-700 ">
+    <div className="bg-tertiary rounded-xl shadow-md overflow-hidden font-Urbanist h-full border border-gray-700 w-full py-12">
       <div className="p-8">
         <div className="flex items-center justify-between">
           <StarRating rating={review.rating} />
@@ -85,7 +85,7 @@ export const  CustomerReviews = ()=>{
   ]
 
   return (
-    <div className="container mx-auto px-4 md:px-10 lg:px-20  lg:my-20 max-[520px]:w-[520px] my-16">
+    <div className="px-4 md:px-10 lg:px-24  lg:my-20 max-[520px]:w-[520px] my-16 ">
       <h2 className="font-bold  mb-4 text-white font-Urbanist text-[24px] md:text-[28px] text-start">What Our Clients Say</h2>
       <p className='mb-16 font-Urbanist text-[#999999] text-[14px] md:text-[16px] leading-relaxed'>Read the success stories and heartfelt testimonials from our valued clients. Discover why they chose Estatein for their real estate needs.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

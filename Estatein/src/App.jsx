@@ -6,6 +6,7 @@ import { LandingPage } from './pages/LandingPage';
 import EmailVerification from './pages/EmailVerification';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import { About } from './pages/About';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <Router>
         <Routes>
           <Route path='/' element={<LandingPage/>}/>
+          <Route path='/about' element={<About/>}/>
           <Route path="/login" element={<LoginForm/>}/>
           <Route path="/register" element={<RegisterForm/>}/>
           <Route path='/email-verification' element={<EmailVerification/>}></Route>

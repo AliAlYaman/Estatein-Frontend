@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // Add useLocation
 import { logout } from "../services/api/api";
 
 export const Navbar = () => {
-  const [isAuth, setIsAuth] = useState(false)
-  // State to handle mobile menu open/close
+  const [isAuth, setIsAuth] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // State to track the active link
   const [activeLink, setActiveLink] = useState("home");
-  
+
+  const location = useLocation(); // Get current URL
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -18,29 +17,44 @@ export const Navbar = () => {
     setActiveLink(link);
   };
 
-  const checkAuth = ()=>{
-    const token = localStorage.getItem('token'); 
-        if (!token) {
-            console.error('No token found. Please log in.');
-            setIsAuth(false)
-          }
-        else{
-          setIsAuth(true)
-        }
-  }
+  const checkAuth = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("No token found. Please log in.");
+      setIsAuth(false);
+    } else {
+      setIsAuth(true);
+    }
+  };
 
-  const handleLogout = async()=>{
+  const handleLogout = async () => {
     await logout();
-    setIsAuth(false)
-  }
+    setIsAuth(false);
+  };
 
-  useEffect(()=> {
-    checkAuth()
-  } , [])
+  // Update the active link based on the current pathname
+  useEffect(() => {
+    const path = location.pathname;
+
+    // Set the active link based on the current URL path
+    if (path === "/") {
+      setActiveLink("home");
+    } else if (path.includes("/about")) {
+      setActiveLink("about");
+    } else if (path.includes("/properties")) {
+      setActiveLink("properties");
+    } else if (path.includes("/services")) {
+      setActiveLink("services");
+    }
+  }, [location]); // Trigger useEffect when location changes
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   return (
     <>
-      <div className="flex font-Urbanist max-[520px]:w-[520px] text-white justify-between items-center bg-secondary h-[60px] sm:px-[65px] xl:px-[120px] px-[16px] sm:h-[80px] xl:h-[100px] sm:text-[14px] text-lg  ">
+      <div className="flex font-Urbanist max-[520px]:w-[520px] text-white justify-between items-center bg-secondary h-[60px] sm:px-[65px] xl:px-[120px] px-[16px] sm:h-[80px] xl:h-[100px] sm:text-[14px] text-lg w-full">
         {/* Logo Section */}
         <div className="flex justify-center items-center gap-2">
           <img src="assets/logo/logo.png" height={50} width={50} alt="logo" />
@@ -53,7 +67,9 @@ export const Navbar = () => {
             <Link
               to="/"
               className={`px-4 py-2 rounded-md ${
-                activeLink === "home" ? "bg-tertiary border-gray-800 border-[0.75px]" : ""
+                activeLink === "home"
+                  ? "bg-tertiary border-gray-800 border-[0.75px]"
+                  : ""
               }`}
               onClick={() => handleLinkClick("home")}
             >
@@ -62,7 +78,9 @@ export const Navbar = () => {
             <Link
               to="/about"
               className={`px-4 py-2 rounded-md ${
-                activeLink === "about" ? "bg-tertiary border-gray-800 border-[0.75px]" : ""
+                activeLink === "about"
+                  ? "bg-tertiary border-gray-800 border-[0.75px]"
+                  : ""
               }`}
               onClick={() => handleLinkClick("about")}
             >
@@ -71,7 +89,9 @@ export const Navbar = () => {
             <Link
               to="/properties"
               className={`px-4 py-2 rounded-md ${
-                activeLink === "properties" ? "bg-tertiary border-gray-800 border-[0.75px]" : ""
+                activeLink === "properties"
+                  ? "bg-tertiary border-gray-800 border-[0.75px]"
+                  : ""
               }`}
               onClick={() => handleLinkClick("properties")}
             >
@@ -80,7 +100,9 @@ export const Navbar = () => {
             <Link
               to="/services"
               className={`px-4 py-2 rounded-md ${
-                activeLink === "services" ? "bg-tertiary border-gray-800 border-[0.75px]" : ""
+                activeLink === "services"
+                  ? "bg-tertiary border-gray-800 border-[0.75px]"
+                  : ""
               }`}
               onClick={() => handleLinkClick("services")}
             >
@@ -91,7 +113,21 @@ export const Navbar = () => {
 
         {/* Login Button - Hidden on mobile, visible on larger screens */}
         <div className="hidden md:flex justify-between items-center ">
-          {isAuth ? <button onClick={handleLogout} className="bg-tertiary  border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold" >Log out</button> : <Link to='/login' className="bg-tertiary  border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold">Log in</Link>}
+          {isAuth ? (
+            <button
+              onClick={handleLogout}
+              className="bg-tertiary  border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold"
+            >
+              Log out
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-tertiary  border-gray-800 border-[0.75px] px-4 py-2 rounded-md font-semibold"
+            >
+              Log in
+            </Link>
+          )}
         </div>
 
         {/* Hamburger Icon - Visible on mobile screens only */}
@@ -120,41 +156,62 @@ export const Navbar = () => {
         <div className="md:hidden flex flex-col bg-secondary text-white py-4 space-y-4 px-4">
           <Link
             to="/"
-            className={`p-3 rounded-md ${activeLink === "home" ? "bg-tertiary" : ""}`}
+            className={`p-3 rounded-md ${
+              activeLink === "home" ? "bg-tertiary" : ""
+            }`}
             onClick={() => handleLinkClick("home")}
           >
             Home
           </Link>
           <Link
             to="/about"
-            className={`p-3 rounded-md ${activeLink === "about" ? "bg-tertiary" : ""}`}
+            className={`p-3 rounded-md ${
+              activeLink === "about" ? "bg-tertiary" : ""
+            }`}
             onClick={() => handleLinkClick("about")}
           >
             About Us
           </Link>
           <Link
             to="/properties"
-            className={`p-3 rounded-md ${activeLink === "properties" ? "bg-tertiary" : ""}`}
+            className={`p-3 rounded-md ${
+              activeLink === "properties" ? "bg-tertiary" : ""
+            }`}
             onClick={() => handleLinkClick("properties")}
           >
             Properties
           </Link>
           <Link
             to="/services"
-            className={`p-3 rounded-md ${activeLink === "services" ? "bg-tertiary" : ""}`}
+            className={`p-3 rounded-md ${
+              activeLink === "services" ? "bg-tertiary" : ""
+            }`}
             onClick={() => handleLinkClick("services")}
           >
             Services
           </Link>
-          {isAuth ? <button onClick={handleLogout}   className={`text-start p-3 rounded-md ${activeLink === "services" ? "bg-tertiary" : ""}`}>
-          Log out
-          </button>:<Link to="/login"  className={`p-3 rounded-md ${activeLink === "services" ? "bg-tertiary" : ""}`}
-            onClick={() => handleLinkClick("services")}>
-            Log in
-          </Link> }
+          {isAuth ? (
+            <button
+              onClick={handleLogout}
+              className={`text-start p-3 rounded-md ${
+                activeLink === "services" ? "bg-tertiary" : ""
+              }`}
+            >
+              Log out
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className={`p-3 rounded-md ${
+                activeLink === "services" ? "bg-tertiary" : ""
+              }`}
+              onClick={() => handleLinkClick("services")}
+            >
+              Log in
+            </Link>
+          )}
         </div>
       )}
     </>
   );
 };
-
