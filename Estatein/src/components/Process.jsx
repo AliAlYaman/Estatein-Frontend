@@ -49,7 +49,7 @@ export function FeaturesSectionDemo() {
   ];
   return (
     <>
-      <div className="bg-tertiary max-[520px]:w-[520px] text-white pt-20 px-8 sm:px-10 md:px-12 lg:px-28 w-full ">
+      <div className="bg-tertiary max-[520px]:w-[520px] text-white pt-20 px-8 sm:px-10 md:px-12 lg:px-28 w-full font-Urbanist">
         <div className="">
           <h2 className="text-3xl font-bold mb-4">Navigating the Estatein Experience</h2>
           <p className="text-gray-400 max-w-3xl">
@@ -70,7 +70,7 @@ const Feature = ({ title, description, icon }) => {
   return (
     <div
       className={cn(
-        "flex flex-col lg:border-r bg-black py-8 relative group/feature border-white dark:border-neutral-800"
+        "flex flex-col lg:border-r font-Urbanist bg-black py-8 relative group/feature border-white dark:border-neutral-800"
       )}
     >
       <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-[#703BF7] to-transparent pointer-events-none" />

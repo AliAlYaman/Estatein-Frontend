@@ -15,7 +15,7 @@ export const Achievements = () => {
     ];
   
     return (
-      <div className="bg-tertiary max-[520px]:w-[520px] text-white py-16 px-8 sm:px-10 md:px-12 lg:px-28 w-full">
+      <div className="bg-tertiary max-[520px]:w-[520px] text-white py-16 px-8 sm:px-10 md:px-12 lg:px-28 w-full font-Urbanist">
         <div className="">
           <h2 className="text-3xl font-bold mb-4">Our Achievements</h2>
           <p className="text-gray-400 mb-12 max-w-3xl">
