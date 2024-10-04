@@ -50,7 +50,7 @@ export const LandingPage = () => {
     <Navbar/>
     <HeroSection/>
     <Cards/>
-    <PaginatedItems itemsPerPage={3}/>
+    {/* <PaginatedItems itemsPerPage={3}/> */}
     <CustomerReviews/>
     <FAQCards faqs={faqData}/>
     <Explore/>
