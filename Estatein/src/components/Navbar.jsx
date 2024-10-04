@@ -54,7 +54,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <div className="flex font-Urbanist max-[520px]:w-[520px] text-white justify-between items-center bg-secondary h-[60px] sm:px-[65px] xl:px-[120px] px-[16px] sm:h-[80px] xl:h-[100px] sm:text-[14px] text-lg w-full">
+      <div className="flex font-Urbanist  text-white justify-between items-center bg-secondary h-[60px] sm:px-[65px] xl:px-[120px] px-[16px] sm:h-[80px] xl:h-[100px] sm:text-[14px] text-lg w-full">
         {/* Logo Section */}
         <div className="flex justify-center items-center gap-2">
           <img src="assets/logo/logo.png" height={50} width={50} alt="logo" />

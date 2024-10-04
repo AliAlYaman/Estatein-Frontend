@@ -16,7 +16,7 @@ export const AboutHeroSection = () => {
   return (
     <>
       
-      <div className="flex flex-col max-[520px]:w-[520px] md:flex-row md:h-[600px] h-auto font-Urbanist text-white xl:px-24 lg:px-12 md:px-8 px-12 bg-tertiary 2xl:mt-10 ">
+      <div className="flex flex-col md:flex-row md:h-[600px] h-auto font-Urbanist text-white xl:px-24 lg:px-12 md:px-8 px-12 bg-tertiary 2xl:mt-10 pt-10">
         {/* Left Section */}
         <div className="flex flex-col justify-center items-start  md:w-1/2 w-full bg-tertiary gap-3 p-4 md:p-8 ">
           <p className="text-[32px] md:text-[45px] leading-tight font-semibold text-center md:text-left ">

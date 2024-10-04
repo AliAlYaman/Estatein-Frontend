@@ -24,13 +24,13 @@ const FAQCards = ({ faqs = [] }) => {
   };
 
   return (
-    <div className="w-full  py-8 px-4 md:px-10 lg:px-28 my-10 lg:my-20 ">
+    <div className="w-full   px-4 md:px-10 lg:px-28 py-10 lg:my-20 bg-secondary">
          <h2 className="font-bold  mb-4 text-white font-Urbanist text-[24px] md:text-[28px] text-start">Frequently Asked Questions</h2>
          <p className='mb-16 font-Urbanist text-[#999999] text-[14px] md:text-[16px] leading-relaxed'>Find answers to common questions about Estatein's services, property listings, and the real estate process. We're here to provide clarity and assist you every step of the way.</p>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 text-white ">
         {currentFaqs.length > 0 ? (
           currentFaqs.map((faq, index) => (
-            <div key={index} className="flex flex-col justify-between border p-6 rounded-md shadow-md bg-tertiary border-gray-700 max-[520px]:w-[520px] py-16">
+            <div key={index} className="flex flex-col justify-between border p-6 rounded-md shadow-md bg-tertiary border-gray-700 w-full py-16">
               <h3 className="font-bold text-lg mb-4">{faq.question}</h3>
               <p className="text-sm text-gray-400 mb-10">{faq.answer}</p>
               <Link to='' className="w-full text-[14px] md:text-[14px] font-semibold rounded-md border border-gray-700 px-4 py-3 whitespace-nowrap md:w-fit font-Urbanist">Read More</Link>

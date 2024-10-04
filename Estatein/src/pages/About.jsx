@@ -13,7 +13,7 @@ import { ValuedClients } from "../components/ValuedClients"
 
 export const About = () => {
     return(
-        <>
+        <div className="bg-tertiary">
         <Discover/>
         <Navbar/>
         <AboutHeroSection/>
@@ -24,6 +24,6 @@ export const About = () => {
         <ValuedClients/>
         <Explore/>
         <Footer/>
-        </>
+        </div>
     )
 }

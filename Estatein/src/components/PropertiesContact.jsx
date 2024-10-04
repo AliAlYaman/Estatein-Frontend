@@ -84,7 +84,7 @@ export const ContactForm = () => {
   };
 
   return (
-    <div className="min-h-screen w-full max-[520px]:w-[520px] bg-opacity-90 text-gray-300 flex items-center justify-center px-8 md:px-16 lg:px-24 xl:px-32 py-24">
+    <div className="min-h-screen w-full bg-opacity-90 text-gray-300 flex items-center justify-center px-8 md:px-16 lg:px-24 xl:px-32 py-24">
       <div className="w-full bg-black bg-opacity-50 p-8 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold mb-6 text-white">Let's Make it Happen</h1>
         <form onSubmit={handleSubmit} className="space-y-6">

@@ -1,6 +1,6 @@
 export const OurValues = () => {
   return (
-    <div className="bg-tertiary text-white xl:p-28 lg:px-20 md:px-16 px-8 py-12 flex flex-col md:flex-row gap-12 pt-12 w-full max-[520px]:w-[520px] font-Urbanist">
+    <div className="bg-tertiary text-white xl:p-28 lg:px-20 md:px-16 px-8 py-12 flex flex-col md:flex-row gap-12 pt-12 w-full  font-Urbanist">
       {/* Left Section */}
       <div className="flex flex-col justify-center md:w-1/2 w-full">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">

@@ -15,7 +15,7 @@ export const HeroSection = () => {
 
   return (
     <>
-      <div className="flex flex-col max-[520px]:w-[520px] md:flex-row md:h-[600px] h-auto font-Urbanist text-white w-full">
+      <div className="flex flex-col md:flex-row md:h-[600px] h-auto font-Urbanist text-white w-full">
         {/* Left Section */}
         <div className="flex flex-col justify-center items-center  md:w-1/2 w-full bg-tertiary gap-3 p-4 md:p-8">
           <p className="text-[32px] md:text-[45px] leading-tight font-semibold text-center md:text-left ">

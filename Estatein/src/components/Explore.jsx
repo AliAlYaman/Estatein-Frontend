@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export const Explore = () => {
   return (
     <>
-      <div className="max-[520px]:w-[520px] flex flex-col  md:flex-row w-full  h-fit justify-around items-center bg-tertiary bg-[url('assets/background/CTA.png')] bg-cover px-24 py-8 md:py-16">
+      <div className="flex flex-col  md:flex-row w-full  h-fit justify-around items-center bg-tertiary bg-[url('assets/background/CTA.png')] bg-cover px-24 py-8 md:py-16">
         <div className="flex flex-col font-bold gap-4 md:gap-6 w-full">
           <h2 className="text-white font-Urbanist text-[20px] md:text-[28px] text-center md:text-start">
             What Our Clients Say

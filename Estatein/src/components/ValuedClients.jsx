@@ -19,7 +19,7 @@ const clients = [
   
   export const ValuedClients= ()=>{
     return (
-      <div className="bg-tertiary max-[520px]:w-[520px] text-white py-16 px-28 md:px-12 sm:px-10 max-sm:px-12 lg:px-32 font-Urbanist">
+      <div className="bg-tertiary  text-white py-16 px-28 md:px-12 sm:px-10 max-sm:px-12 lg:px-32 font-Urbanist">
         <div className="">
           <h2 className="text-3xl font-bold mb-2">Our Valued Clients</h2>
           <p className="text-gray-300 mb-12">

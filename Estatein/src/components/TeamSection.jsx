@@ -23,7 +23,7 @@ const teamMembers = [
   
   export default function TeamSection() {
     return (
-      <div className="bg-tertiary max-[520px]:w-[520px] text-white py-16 px-28 md:px-12 sm:px-10 max-sm:px-12 lg:px-32 font-Urbanist">
+      <div className="bg-tertiary text-white py-16 px-28 md:px-12 sm:px-10 max-sm:px-12 lg:px-32 font-Urbanist">
         <div className="">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">Meet the Estatein Team</h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mb-8">

@@ -49,15 +49,15 @@ export function FeaturesSectionDemo() {
   ];
   return (
     <>
-      <div className="bg-tertiary max-[520px]:w-[520px] text-white pt-20 px-8 sm:px-10 md:px-12 lg:px-28 w-full font-Urbanist">
-        <div className="">
-          <h2 className="text-3xl font-bold mb-4">Navigating the Estatein Experience</h2>
-          <p className="text-gray-400 max-w-3xl">
+      <div className="bg-tertiary text-white pt-20 px-8 sm:px-10 md:px-12 lg:px-28 w-full font-Urbanist">
+        <div className="flex flex-col pb-10">
+          <h2 className="text-3xl font-bold pb-4">Navigating the Estatein Experience</h2>
+          <p className="text-gray-400">
           At Estatein, we've designed a straightforward process to help you find and purchase your dream property with ease. Here's a step-by-step guide to how it all works.
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative z-10 py-10 px-10 bg-tertiary lg:px-28 gap-1 max-[520px]:w-[520px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative z-10 py-10 px-10 bg-tertiary lg:px-28 gap-1 ">
         {features.map((feature, index) => (
           <Feature key={feature.title} {...feature} index={index} />
         ))}

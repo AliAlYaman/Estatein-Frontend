@@ -6,12 +6,12 @@ import { ContactForm } from "../components/PropertiesContact";
 import { PropertiesHeroSection } from "../components/PropertiesHeroSection";
 
 export const Properties = () =>{
-    return(<>
+    return(<div className="bg-tertiary">
     <Discover/>
     <Navbar/>
     <PropertiesHeroSection/>
     <ContactForm/>
     <Explore/>
     <Footer/>
-    </>);
+    </div>);
 }

@@ -19,7 +19,7 @@ export default function Footer() {
     ];
   
     return (
-      <footer className="bg-black text-white py-12 max-[520px]:w-[520px] px-24">
+      <footer className="bg-black text-white py-12 w-full px-24">
         <div className="container mx-auto xl:px-1">
           {/* Grid layout for footer columns */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8">
