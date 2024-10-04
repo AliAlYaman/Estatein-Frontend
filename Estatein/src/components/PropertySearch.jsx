@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ChevronDown,
   MapPin,
@@ -8,6 +8,7 @@ import {
   Calendar,
   Search,
 } from "lucide-react";
+import { searchProperty } from "../services/api/api"; // API function
 
 const Dropdown = ({ label, icon, options, selectedOption, onOptionSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,9 +50,19 @@ export const PropertySearch = () => {
   const [propertySize, setPropertySize] = useState("");
   const [buildYear, setBuildYear] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [properties, setProperties] = useState([]); // State to store search results
+  const [loading, setLoading] = useState(false); // Loading state
+  const [showAll, setShowAll] = useState(false); // To show all properties or only the first 9
 
-  const handleSearch = () => {
-    // Use selected values from dropdowns
+  // Fetch properties from localStorage on component mount
+  useEffect(() => {
+    const storedProperties = localStorage.getItem("properties");
+    if (storedProperties) {
+      setProperties(JSON.parse(storedProperties));
+    }
+  }, []);
+
+  const handleSearch = async () => {
     const searchData = {
       searchTerm,
       location,
@@ -60,11 +71,24 @@ export const PropertySearch = () => {
       propertySize,
       buildYear,
     };
-    
-    console.log(searchData);
 
-    // Perform further actions like sending the data to an API or filtering properties
+    try {
+      setLoading(true); // Start loading
+      const result = await searchProperty(searchData); // Call the search API
+      setProperties(result); // Store the result in state
+
+      // Save properties to localStorage
+      localStorage.setItem("properties", JSON.stringify(result));
+
+      setShowAll(false); // Reset showing all when new search happens
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+    } finally {
+      setLoading(false); // End loading
+    }
   };
+
+  const displayedProperties = showAll ? properties : properties.slice(0, 9);
 
   return (
     <div className="flex flex-col items-center justify-center py-4 w-full">
@@ -112,7 +136,7 @@ export const PropertySearch = () => {
               icon={<Maximize className="w-5 h-5" />}
               options={[
                 "0 - 1000 sq ft",
-                "1000 - 2000 sq ft",
+                "1000 - 2000 sq",
                 "2000 - 3000 sq ft",
                 "3000+ sq ft",
               ]}
@@ -136,6 +160,96 @@ export const PropertySearch = () => {
           </div>
         </div>
       </div>
+
+      {/* Display loading state */}
+      {loading && <p className="mt-4">Loading properties...</p>}
+
+      {/* Display the search results */}
+      {properties.length > 0 && (
+        <div className="mt-8 w-full">
+          <h2 className="text-xl text-white mb-4">Search Results</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {displayedProperties.map((property, index) => (
+              <div
+                key={property.id}
+                className="bg-secondary border border-gray-600 font-Urbanist text-white shadow-md rounded-lg overflow-hidden p-3 flex flex-col justify-between"
+              >
+                <img
+                  src={property.image}
+                  alt={property.title}
+                  className="w-full h-[350px] object-cover rounded-lg"
+                />
+                <div className="p-4 text-left">
+                  <h3 className="text-lg sm:text-xl font-semibold">
+                    {property.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm sm:text-base">
+                    {property.subtitle}
+                  </p>
+                  <div className="flex flex-wrap w-full justify-between items-center gap-2 py-3">
+                    <div className="flex items-center gap-2 px-2 py-1 bg-[#262626] rounded-full">
+                      <img
+                        src="assets/icons/bedroom.png"
+                        alt="bedroom"
+                        className="h-4"
+                      />
+                      <p className="text-xs sm:text-sm whitespace-nowrap">
+                        {property.bedroom}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2 px-2 py-1 bg-[#262626] rounded-full">
+                      <img
+                        src="assets/icons/bathroom.png"
+                        alt="bathroom"
+                        className="h-4"
+                      />
+                      <p className="text-xs sm:text-sm whitespace-nowrap">
+                        {property.bathroom}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2 px-2 py-1 bg-[#262626] rounded-full">
+                      <img
+                        src="assets/icons/villa.png"
+                        alt="villa"
+                        className="h-4"
+                      />
+                      <p className="text-xs sm:text-sm whitespace-nowrap">
+                        {property.type}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-4 py-4">
+                    <div className="flex flex-col">
+                      <p className="text-sm text-[#999999]">Price:</p>
+                      <p className="text-white text-lg font-bold">
+                        {property.price}
+                      </p>
+                    </div>
+                    <button className="mt-4 px-4 py-2 w-full text-sm  bg-primary text-white rounded-md hover:bg-blue-600">
+                      View Property Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Show "Load More" button if there are more than 9 properties */}
+          {properties.length > 9 && !showAll && (
+            <button
+              className="mt-4 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg"
+              onClick={() => setShowAll(true)}
+            >
+              Load More Properties
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Display a message if no results are found */}
+      {!loading && properties.length === 0 && (
+        <p className="text-gray-400 mt-4">No properties found.</p>
+      )}
     </div>
   );
 };

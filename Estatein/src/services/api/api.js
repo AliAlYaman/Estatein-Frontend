@@ -131,3 +131,31 @@ export const forgetPassword = async (email) =>{
 
   return response.data;
 }
+
+
+export const searchProperty = async ({searchTerm,
+  location,
+  propertyType,
+  pricingRange,
+  propertySize,
+  buildYear}) => {
+  await api.get(`/sanctum/csrf-cookie`, {
+    withCredentials: true, // Important to include credentials for cookies
+  });
+  const response = await api.post('/api/search-properties' , {
+      searchTerm,
+      location,
+      propertyType,
+      pricingRange,
+      propertySize,
+      buildYear,
+  } , {
+    headers: {
+      Accept: 'application/json'
+    },
+    withCredentials:true,
+    withXSRFToken:true
+  })
+
+  return response.data;
+}
