@@ -45,7 +45,7 @@ export const LandingPage = () => {
           console.log(e); // Handle the error (unauthenticated, network error, etc.)
         }
       };
-    return(<>
+    return(<div className="bg-tertiary">
     <Discover/>
     <Navbar/>
     <HeroSection/>
@@ -55,5 +55,5 @@ export const LandingPage = () => {
     <FAQCards faqs={faqData}/>
     <Explore/>
     <Footer/>
-    </>);
+    </div>);
 }
