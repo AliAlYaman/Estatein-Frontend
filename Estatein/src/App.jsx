@@ -8,6 +8,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import { About } from './pages/About';
 import { Properties } from './pages/Properties';
+import { Services } from './pages/Services';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path='/' element={<LandingPage/>}/>
           <Route path='/about' element={<About/>}/>
           <Route path='/properties' element={<Properties/>}/>
+          <Route path='/services' element={<Services/>}/>
           <Route path="/login" element={<LoginForm/>}/>
           <Route path="/register" element={<RegisterForm/>}/>
           <Route path='/email-verification' element={<EmailVerification/>}></Route>
